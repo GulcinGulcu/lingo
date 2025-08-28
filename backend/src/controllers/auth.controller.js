@@ -1,3 +1,4 @@
+import { upsertSteamUser } from "../lib/stream.js";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 
@@ -21,9 +22,9 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "Invalid email format" });
     }
 
-    const isUserExist = await User.findOne({ email });
+    const existingUser = await User.findOne({ email });
 
-    if (isUserExist) {
+    if (existingUser) {
       return res.status(400).json({ message: "User already exists." });
     }
 
@@ -35,6 +36,18 @@ export const signup = async (req, res) => {
       password,
       profilePic: randomAvatar,
     });
+
+    try {
+      await upsertSteamUser({
+        id: newUser._id.toString(),
+        name: newUser.fullName,
+        image: newUser.profilePic || "",
+      });
+
+      console.log(`Steamuser is created ${newUser._id}`);
+    } catch (error) {
+      console.log("Error in creating stream user", error);
+    }
 
     const token = jwt.sign(
       { userId: newUser._id },
@@ -59,9 +72,44 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  res.send("Login Route");
+  const { email, password } = req.body;
+
+  try {
+    if (!email || !password) {
+      return res.status(400).json({ message: "All fields are required." });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid email or password." });
+    }
+
+    const isPasswordCorrect = await user.matchPassword(password);
+
+    if (!isPasswordCorrect) {
+      return res.status(401).json({ message: "invalid email or password." });
+    }
+
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
+      expiresIn: "10d",
+    });
+
+    res.cookie("jwt", token, {
+      maxAge: 10 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    return res.status(200).json({ success: true, user });
+  } catch (error) {
+    console.log("Error in login", error.message);
+    return res.status(500).json({ message: "Server Error" });
+  }
 };
 
 export const logout = async (req, res) => {
-  res.send("Logout Route");
+  res.clearCookie("jwt");
+
+  res.status(200).json({ success: true, message: "Logged out successfully" });
 };
