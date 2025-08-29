@@ -3,20 +3,20 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const apiKey = process.env.STEAM_API_KEY;
-const apiSecret = process.env.STEAM_API_SECRET;
+const apiKey = process.env.STREAM_API_KEY;
+const apiSecret = process.env.STREAM_API_SECRET;
 
 if (!apiKey || !apiSecret) {
   console.log("Api key or api secret is missing.");
 }
 
-const steamClient = StreamChat.getInstance(apiKey, apiSecret);
+const streamClient = StreamChat.getInstance(apiKey, apiSecret);
 
-export const upsertSteamUser = async (userData) => {
+export const upsertStreamUser = async (userData) => {
   try {
-    await steamClient.upsertUsers([userData]);
+    await streamClient.upsertUsers([userData]);
     return userData;
   } catch (error) {
-    console.error("Error in unserting user", error);
+    console.error("Error in upserting user", error);
   }
 };

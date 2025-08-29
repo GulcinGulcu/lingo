@@ -1,4 +1,4 @@
-import { upsertSteamUser } from "../lib/stream.js";
+import { upsertStreamUser } from "../lib/stream.js";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 
@@ -38,13 +38,13 @@ export const signup = async (req, res) => {
     });
 
     try {
-      await upsertSteamUser({
+      await upsertStreamUser({
         id: newUser._id.toString(),
         name: newUser.fullName,
         image: newUser.profilePic || "",
       });
 
-      console.log(`Steamuser is created ${newUser._id}`);
+      console.log(`Stream user is created ${newUser._id}`);
     } catch (error) {
       console.log("Error in creating stream user", error);
     }
@@ -154,12 +154,12 @@ export const onboard = async (req, res) => {
     }
 
     try {
-      await upsertSteamUser({
+      await upsertStreamUser({
         id: updatedUser._id,
         name: updatedUser.fullName,
         image: updatedUser.profilePic || "",
       });
-      console.log(`Steamuser is updated ${updatedUser._id}`);
+      console.log(`Streamuser is updated ${updatedUser._id}`);
     } catch (error) {
       console.log("Error in updating stream user", error);
     }
