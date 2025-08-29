@@ -13,5 +13,8 @@ router.post("/login", login);
 router.post("/logout", logout);
 router.post("/signup", signup);
 router.post("/onboard", protectRoute, onboard);
+router.get("/me", protectRoute, async (req, res) => {
+  return res.status(200).json({ success: true, user: req.user });
+});
 
 export default router;
