@@ -113,3 +113,60 @@ export const logout = async (req, res) => {
 
   res.status(200).json({ success: true, message: "Logged out successfully" });
 };
+
+export const onboard = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const { fullName, bio, nativeLanguage, learningLanguage, location } =
+      req.body;
+
+    if (
+      !fullName ||
+      !bio ||
+      !nativeLanguage ||
+      !location ||
+      !learningLanguage
+    ) {
+      return res.status(400).json({
+        message: "Provide all fields",
+        missingFields: [
+          !fullName && "Fullname",
+          !bio && "bio",
+          !nativeLanguage && "Native language",
+          !learningLanguage && "Learning language",
+          !location && "Location",
+        ].filter(Boolean),
+      });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        ...req.body,
+        isOnboarded: true,
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    try {
+      await upsertSteamUser({
+        id: updatedUser._id,
+        name: updatedUser.fullName,
+        image: updatedUser.profilePic || "",
+      });
+      console.log(`Steamuser is updated ${updatedUser._id}`);
+    } catch (error) {
+      console.log("Error in updating stream user", error);
+    }
+
+    return res.status(200).json({ success: true, user: updatedUser });
+  } catch (error) {
+    console.error("Onboarding error:", error);
+    return res.status(500).json({ message: "Server Error" });
+  }
+};
