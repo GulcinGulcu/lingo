@@ -117,3 +117,42 @@ export const acceptFriendRequest = async (req, res) => {
     console.log("Error in accepting friend request", error.message);
   }
 };
+
+export const getFriendRequests = async (req, res) => {
+  try {
+    const incomingRequests = await FriendRequest.find({
+      recipient: req.user._id,
+      status: "pending",
+    }).populate(
+      "sender",
+      "fullName profilePic nativeLanguage learningLanguage"
+    );
+
+    const acceptedRequests = await FriendRequest.find({
+      recipient: req.user._id,
+      status: "accepted",
+    }).populate("recipient", "fullName profilePic");
+
+    return res.status(200).json({ incomingRequests, acceptedRequests });
+  } catch (error) {
+    console.log("Error in getting friend requests", error.message);
+    return res.status(500).json({ message: "Server Error" });
+  }
+};
+
+export const getOutgoingFriendRequests = async (req, res) => {
+  try {
+    const outgoingRequests = await FriendRequest.find({
+      sender: req.user._id,
+      status: "pending",
+    }).populate(
+      "recipient",
+      "fullName profilePic nativeLanguage learningLanguage"
+    );
+
+    return res.status(200).json(outgoingRequests);
+  } catch (error) {
+    console.log("Error in getting outgoing friend requests", error.message);
+    return res.status(500).json({ message: "Server Error" });
+  }
+};
