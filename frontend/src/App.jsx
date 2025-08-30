@@ -1,5 +1,9 @@
 const App = () => {
-  return <div className="bg-blue-500 h-screen">App</div>;
+  return (
+    <div className="h-screen" data-theme="night">
+      App
+    </div>
+  );
 };
 
 export default App;
