@@ -3,6 +3,8 @@ import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import OnboardingPage from "./pages/OnboardingPage";
+import { useQuery } from "@tanstack/react-query";
+import { axiosInstance } from "./lib/axios.js";
 
 const App = () => {
   return (
