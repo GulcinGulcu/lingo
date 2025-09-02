@@ -28,7 +28,7 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "User already exists." });
     }
 
-    const randomAvatar = `https://avatar.iran.liara.run/public.png`;
+    const randomAvatar = `https://avatar.iran.liara.run/public`;
 
     const newUser = await User.create({
       email,

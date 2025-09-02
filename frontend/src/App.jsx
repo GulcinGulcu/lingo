@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import OnboardingPage from "./pages/OnboardingPage";
 import { PageLoader } from "./components/PageLoader.jsx";
 import { useAuthUser } from "./hooks/useAuthUser.jsx";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const { isLoading, authUser } = useAuthUser();
@@ -14,7 +15,7 @@ const App = () => {
   if (isLoading) return <PageLoader />;
 
   return (
-    <div className="h-screen" data-theme="dracula">
+    <div className="min-h-screen" data-theme="dracula">
       <Routes>
         <Route
           path="/"
@@ -36,9 +37,20 @@ const App = () => {
         />
         <Route
           path="/onboarding"
-          element={isAuthenticated ? <OnboardingPage /> : <Navigate to={"/"} />}
+          element={
+            isAuthenticated ? (
+              !isOnboarded ? (
+                <OnboardingPage />
+              ) : (
+                <Navigate to="/" />
+              )
+            ) : (
+              <Navigate to={"/login"} />
+            )
+          }
         />
       </Routes>
+      <Toaster />
     </div>
   );
 };

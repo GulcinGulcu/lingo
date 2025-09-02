@@ -20,12 +20,15 @@ const SignUpPage = () => {
   } = useMutation({
     mutationFn: signup,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
+    onError: (error) => toast.error(error.response.data.message)
   });
 
   const handleSignup = (e) => {
     e.preventDefault();
     signupMutation(signupData);
   };
+
+   
 
   return (
     <div className="h-screen flex justify-center items-center p-4 sm:p-6 lg:p-8">
