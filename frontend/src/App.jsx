@@ -9,9 +9,7 @@ import { useAuthUser } from "./hooks/useAuthUser.jsx";
 const App = () => {
   const { isLoading, authUser } = useAuthUser();
   const isAuthenticated = Boolean(authUser);
-  console.log(authUser)
   const isOnboarded = authUser?.isOnboarded;
-
 
   if (isLoading) return <PageLoader />;
 
