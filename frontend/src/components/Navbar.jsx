@@ -3,22 +3,15 @@ import { useLocation } from "react-router";
 import { Link } from "react-router";
 import Logo from "../../icons/Logo";
 import { NotificationIcon } from "../../icons/NotificationIcon";
-import { useMutation } from "@tanstack/react-query";
-import { logout } from "../lib/api";
-import { useQueryClient } from "@tanstack/react-query";
 import { LogoutIcon } from "../../icons/LogoutIcon";
+import { useLogout } from "../hooks/useLogout";
 
 export const Navbar = () => {
   const { authUser } = useAuthUser();
   const location = useLocation();
   const isChatPage = location.pathname?.startsWith("/chat");
 
-  const queryClient = useQueryClient();
-
-  const { mutate: logoutMutation } = useMutation({
-    mutationFn: logout,
-    onSuccess: queryClient.invalidateQueries({ queryKey: ["authUser"] }),
-  });
+  const { logoutMutation } = useLogout();
 
   return (
     <nav className="shadow-lg bg-base-200 sticky top-0 flex items-center h-16">

@@ -1,18 +1,15 @@
 import { useState } from "react";
 import { useAuthUser } from "../hooks/useAuthUser";
-import { useMutation } from "@tanstack/react-query";
-import { onboard } from "../lib/api";
-import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import CameraIcon from "../../icons/CameraIcon";
 import ShuffleIcon from "../../icons/ShuffleIcon";
 import { LANGUAGES } from "../constants";
 import LocationIcon from "../../icons/LocationIcon";
 import { GlobeIcon } from "../../icons/GlobeIcon";
+import { useOnboard } from "../hooks/useOnboard";
 
 const OnboardingPage = () => {
   const { authUser } = useAuthUser();
-  const queryClient = useQueryClient();
 
   const [onboardingData, setOnboardingData] = useState({
     fullName: authUser?.fullName || "",
@@ -23,13 +20,7 @@ const OnboardingPage = () => {
     profilePic: authUser?.profilePic || "",
   });
 
-  const { mutate: onboardingMutation, isPending } = useMutation({
-    mutationFn: onboard,
-    onSuccess: () => {
-      toast.success("Profile onboarded successfully");
-      queryClient.invalidateQueries({ queryKey: ["authUser"] });
-    },
-  });
+  const { onboardingMutation, isPending } = useOnboard();
 
   const handleSubmit = (e) => {
     e.preventDefault();

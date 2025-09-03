@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Logo from "../../icons/Logo";
 import { Link } from "react-router";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { signup } from "../lib/api.js";
+import { useSignUp } from "../hooks/useSignUp.jsx";
 
 const SignUpPage = () => {
   const [signupData, setSignupData] = useState({
@@ -11,24 +10,12 @@ const SignUpPage = () => {
     password: "",
   });
 
-  const queryClient = useQueryClient();
-
-  const {
-    mutate: signupMutation,
-    isPending,
-    error,
-  } = useMutation({
-    mutationFn: signup,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
-    onError: (error) => toast.error(error.response.data.message)
-  });
+  const { signupMutation, isPending, error } = useSignUp();
 
   const handleSignup = (e) => {
     e.preventDefault();
     signupMutation(signupData);
   };
-
-   
 
   return (
     <div className="h-screen flex justify-center items-center p-4 sm:p-6 lg:p-8">
