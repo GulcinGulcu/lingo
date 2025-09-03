@@ -7,6 +7,7 @@ import { PageLoader } from "./components/PageLoader.jsx";
 import { useAuthUser } from "./hooks/useAuthUser.jsx";
 import { Toaster } from "react-hot-toast";
 import { Layout } from "./components/layout.jsx";
+import { NotificationPage } from "./pages/NotificationPage.jsx";
 
 const App = () => {
   const { isLoading, authUser } = useAuthUser();
@@ -58,6 +59,20 @@ const App = () => {
                 <OnboardingPage />
               ) : (
                 <Navigate to="/" />
+              )
+            ) : (
+              <Navigate to={"/login"} />
+            )
+          }
+        />
+        <Route
+          path="/notification"
+          element={
+            isAuthenticated ? (
+              isOnboarded ? (
+                <NotificationPage />
+              ) : (
+                <Navigate to="/onboarding" />
               )
             ) : (
               <Navigate to={"/login"} />
