@@ -13,7 +13,7 @@ export const SideBar = () => {
     <aside className="w-64 bg-base-200 h-screen shadow-lg hidden lg:flex flex-col sticky top-0">
       <div className="mb-4 p-5">
         <Link to={"/"} className="flex items-center justify-start gap-2">
-          <Logo />
+          <Logo className="text-primary" />
           <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider">
             Lingo
           </span>

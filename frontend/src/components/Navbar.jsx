@@ -5,6 +5,7 @@ import Logo from "../../icons/Logo";
 import { NotificationIcon } from "../../icons/NotificationIcon";
 import { LogoutIcon } from "../../icons/LogoutIcon";
 import { useLogout } from "../hooks/useLogout";
+import { ThemeSelector } from "./ThemeSelector";
 
 export const Navbar = () => {
   const { authUser } = useAuthUser();
@@ -14,7 +15,7 @@ export const Navbar = () => {
   const { logoutMutation } = useLogout();
 
   return (
-    <nav className="shadow-lg bg-base-200 sticky top-0 flex items-center h-16">
+    <nav className="border-b border-base-300 sticky top-0 flex items-center h-16 mx-6">
       <div className="container px-4">
         <div className="flex items-center justify-end w-full">
           {isChatPage && (
@@ -36,6 +37,7 @@ export const Navbar = () => {
             >
               <NotificationIcon className="text-base-content opacity-70" />
             </Link>
+            <ThemeSelector />
             <button
               className="btn btn-ghost btn-circle"
               onClick={logoutMutation}

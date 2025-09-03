@@ -8,16 +8,18 @@ import { useAuthUser } from "./hooks/useAuthUser.jsx";
 import { Toaster } from "react-hot-toast";
 import { Layout } from "./components/layout.jsx";
 import { NotificationPage } from "./pages/NotificationPage.jsx";
+import { useThemeStore } from "./store/themeStore.js";
 
 const App = () => {
   const { isLoading, authUser } = useAuthUser();
   const isAuthenticated = Boolean(authUser);
   const isOnboarded = authUser?.isOnboarded;
+  const { theme } = useThemeStore();
 
   if (isLoading) return <PageLoader />;
 
   return (
-    <div className="min-h-screen" data-theme="dracula">
+    <div className="min-h-screen" data-theme={theme}>
       <Routes>
         <Route
           path="/"
