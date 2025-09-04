@@ -31,21 +31,21 @@ export const onboard = async (onboardData) => {
 };
 
 export const getFriends = async () => {
-  const res = await axiosInstance.get("/friends");
+  const res = await axiosInstance.get("/users/friends");
   return res.data;
 };
 
 export const getRecommendedUsers = async () => {
-  const res = await axiosInstance.get("/");
+  const res = await axiosInstance.get("/users");
   return res.data;
 };
 
 export const getOutgoingFriendRequests = async () => {
-  const res = await axiosInstance.get("/outgoing-friend-requests");
+  const res = await axiosInstance.get("/users/outgoing-friend-requests");
   return res.data;
 };
 
 export const sendFriendRequest = async (userId) => {
-  const res = await axiosInstance.get(`friend-request/${userId}`);
+  const res = await axiosInstance.get(`/users/friend-request/${userId}`);
   return res.data;
 };
