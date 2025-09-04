@@ -10,7 +10,7 @@ export function FriendsIcon(props) {
       {/* Icon from Tabler Icons by Paweł Kuna - https://github.com/tabler/tabler-icons/blob/master/LICENSE */}
       <path
         fill="none"
-        stroke="#888888"
+        stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
