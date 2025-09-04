@@ -15,7 +15,7 @@ export const Navbar = () => {
   const { logoutMutation } = useLogout();
 
   return (
-    <nav className="border-b border-base-300 sticky top-0 flex items-center h-16 mx-6">
+    <nav className="border-b border-base-300 sticky top-0 flex items-center h-16 mx-6 z-30">
       <div className="container px-4">
         <div className="flex items-center justify-end w-full">
           {isChatPage && (
