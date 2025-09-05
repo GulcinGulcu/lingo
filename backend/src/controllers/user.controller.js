@@ -27,7 +27,7 @@ export const getMyFriends = async (req, res) => {
       .select("friends")
       .populate(
         "friends",
-        "fullName profilePicture nativeLanguage learningLanguage"
+        "fullName profilePic nativeLanguage learningLanguage"
       );
 
     return res.status(200).json(user.friends);
@@ -95,10 +95,10 @@ export const acceptFriendRequest = async (req, res) => {
       return res.status(400).json({ message: "Friend request not found" });
     }
 
-    if (request.recipient.toString() !== req.user._id) {
+    if (String(request.recipient) !== String(req.user._id)) {
       return res
         .status(403)
-        .json({ message: "You are not authorized to accept the request" });
+        .json({ message: `You are not authorized to accept the request`});
     }
 
     request.status = "accepted";
@@ -129,7 +129,7 @@ export const getFriendRequests = async (req, res) => {
     );
 
     const acceptedRequests = await FriendRequest.find({
-      recipient: req.user._id,
+      sender: req.user._id,
       status: "accepted",
     }).populate("recipient", "fullName profilePic");
 
