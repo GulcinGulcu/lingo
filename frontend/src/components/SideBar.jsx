@@ -39,7 +39,7 @@ export const SideBar = () => {
           <span>Friends</span>
         </Link>
         <Link
-          to={"/notification"}
+          to={"/notifications"}
           className={`btn btn-ghost justify-start gap-2 w-full ${
             pathname === "/notifications" ? "btn-active" : ""
           }`}

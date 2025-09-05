@@ -30,9 +30,9 @@ export const Navbar = () => {
           )}
           <div className="flex items-center gap-1 px-4">
             <Link
-              to={"/notification"}
+              to={"/notifications"}
               className={`btn btn-ghost btn-circle ${
-                location.pathname === "/notification" ? "btn-active" : ""
+                location.pathname === "/notifications" ? "btn-active" : ""
               }`}
             >
               <NotificationIcon className="text-base-content opacity-70" />
