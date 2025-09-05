@@ -15,6 +15,7 @@ import LocationIcon from "../../icons/LocationIcon";
 import { getLanguageFlag } from "../components/FriendCard";
 import { ClockIcon } from "../../icons/ClockIcon";
 import { AddFriendIcon } from "../../icons/AddFriendIcon";
+import toast from "react-hot-toast";
 
 const HomePage = () => {
   const queryClient = useQueryClient();
@@ -42,6 +43,7 @@ const HomePage = () => {
     mutationFn: sendFriendRequest,
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["outgoingFriendRequests"] }),
+    onError: (error) => toast.error(error.response.data.message)
   });
 
   useEffect(() => {
@@ -62,7 +64,7 @@ const HomePage = () => {
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
             Your Friends
           </h2>
-          <Link to={"/notification"}>
+          <Link to={"/notifications"}>
             <button className="btn btn-outline flex gap-2 btn-sm">
               <FriendsIcon className="text-base-content opacity-70" />
               <span>Friend Requests</span>
@@ -76,7 +78,7 @@ const HomePage = () => {
         ) : friends.length === 0 ? (
           <NoFriendsCard />
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {friends.map((friend) => (
               <FriendCard key={friend._id} friend={friend} />
             ))}
@@ -182,6 +184,6 @@ const HomePage = () => {
   );
 };
 
-const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
+export const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
 export default HomePage;
