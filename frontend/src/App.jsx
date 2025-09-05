@@ -7,7 +7,7 @@ import { PageLoader } from "./components/PageLoader.jsx";
 import { useAuthUser } from "./hooks/useAuthUser.jsx";
 import { Toaster } from "react-hot-toast";
 import { Layout } from "./components/layout.jsx";
-import { NotificationPage } from "./pages/NotificationPage.jsx";
+import { NotificationPage } from "./pages/NotificationsPage.jsx";
 import { useThemeStore } from "./store/themeStore.js";
 
 const App = () => {
