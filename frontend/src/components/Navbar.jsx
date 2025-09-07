@@ -19,16 +19,16 @@ export const Navbar = () => {
       <div className="container px-4">
         <div className="flex items-center justify-end w-full">
           {isChatPage && (
-            <div className="mb-4 p-5">
+            <div className="p-5">
               <Link to={"/"} className="flex items-center justify-start gap-2">
-                <Logo />
+                <Logo className="text-primary" />
                 <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider">
                   Lingo
                 </span>
               </Link>
             </div>
           )}
-          <div className="flex items-center gap-1 px-4">
+          <div className="flex items-center gap-1 px-4 ml-auto">
             <Link
               to={"/notifications"}
               className={`btn btn-ghost btn-circle ${
