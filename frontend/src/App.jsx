@@ -11,6 +11,7 @@ import { NotificationPage } from "./pages/NotificationsPage.jsx";
 import { useThemeStore } from "./store/themeStore.js";
 import { ChatPage } from "./pages/ChatPage.jsx";
 import { CallPage } from "./pages/CallPage.jsx";
+import { FriendsPage } from "./pages/FriendsPage.jsx";
 
 const App = () => {
   const { isLoading, authUser } = useAuthUser();
@@ -76,6 +77,22 @@ const App = () => {
               isOnboarded ? (
                 <Layout showSideBar={false}>
                   <CallPage />
+                </Layout>
+              ) : (
+                <Navigate to="/onboarding" />
+              )
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/friends"
+          element={
+            isAuthenticated ? (
+              isOnboarded ? (
+                <Layout showSideBar>
+                  <FriendsPage />
                 </Layout>
               ) : (
                 <Navigate to="/onboarding" />
