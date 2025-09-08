@@ -10,6 +10,7 @@ import { Layout } from "./components/layout.jsx";
 import { NotificationPage } from "./pages/NotificationsPage.jsx";
 import { useThemeStore } from "./store/themeStore.js";
 import { ChatPage } from "./pages/ChatPage.jsx";
+import { CallPage } from "./pages/CallPage.jsx";
 
 const App = () => {
   const { isLoading, authUser } = useAuthUser();
@@ -65,6 +66,22 @@ const App = () => {
               )
             ) : (
               <Navigate to={"/login"} />
+            )
+          }
+        />
+        <Route
+          path="/call/:id"
+          element={
+            isAuthenticated ? (
+              isOnboarded ? (
+                <Layout showSideBar={false}>
+                  <CallPage />
+                </Layout>
+              ) : (
+                <Navigate to="/onboarding" />
+              )
+            ) : (
+              <Navigate to="/login" />
             )
           }
         />
