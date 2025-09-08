@@ -28,7 +28,8 @@ const OnboardingPage = () => {
   };
 
   const handleRandomAvatar = () => {
-    const randomAvatar = `https://avatar.iran.liara.run/public?${Date.now()}`;
+    const idx = Math.floor(Math.random() * 100) + 1;
+    const randomAvatar = `https://avatar.iran.liara.run/public/${idx}`;
     setOnboardingData({ ...onboardingData, profilePic: randomAvatar });
     toast.success("Random picture is generated!");
   };
