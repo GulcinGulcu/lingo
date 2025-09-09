@@ -23,25 +23,8 @@ This project demonstrates production-ready practices including authentication, r
 
 **Frontend**  
 - React with Vite  
-- TanStack Query with Axios for data fetching and caching  
-- TailwindCSS with 32 themes  
-
-**Backend**  
-- Node.js with Express  
-- MongoDB with Mongoose  
-- JWT-based authentication  
-
-**Other**  
-- WebRTC for video calling  
-- Jest / Supertest for API testing  
-- Deployment: Render (backend)
-
-## Tech Stack
-
-**Frontend**  
-- React with Vite  
 - TanStack Query for data fetching and caching and Axios
-- TailwindCSS/Daisy UI with 32 themes  
+- TailwindCSS/Daisy UI with themes  
 
 **Backend**  
 - Node.js with Express  
