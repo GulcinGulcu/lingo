@@ -1,4 +1,4 @@
-# Fullstack Social Chat Application
+# Lingo
 
 A modern fullstack social app built with **Node.js, Express, MongoDB, React, TanStack Query with Axios, and TailwindCSS**.  
 This project demonstrates production-ready practices including authentication, real-time features, video calling/chatting with Stream SDK, and a customizable user interface.
