@@ -6,7 +6,7 @@ import OnboardingPage from "./pages/OnboardingPage";
 import { PageLoader } from "./components/PageLoader.jsx";
 import { useAuthUser } from "./hooks/useAuthUser.jsx";
 import { Toaster } from "react-hot-toast";
-import { Layout } from "./components/layout.jsx";
+import { Layout } from "./components/Layout.jsx";
 import { NotificationPage } from "./pages/NotificationsPage.jsx";
 import { useThemeStore } from "./store/themeStore.js";
 import { ChatPage } from "./pages/ChatPage.jsx";
