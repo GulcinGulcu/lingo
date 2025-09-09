@@ -125,7 +125,7 @@ export const NotificationPage = () => {
                               {capitalize(req.recipient.fullName)} accepted your
                               friend request
                             </p>
-                            <p className="text-xs flex items-center opacity-70">
+                            <p className="text-xs flex items-center opacity-70 gap-1">
                               <ClockIcon />
                               Recently
                             </p>
